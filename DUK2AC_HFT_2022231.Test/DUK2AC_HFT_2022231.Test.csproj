@@ -4,4 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DUK2AC_HFT_2022231.Logic\DUK2AC_HFT_2022231.Logic.csproj" />
+    <ProjectReference Include="..\DUK2AC_HFT_2022231.Models\DUK2AC_HFT_2022231.Models.csproj" />
+    <ProjectReference Include="..\DUK2AC_HFT_2022231.Repositroy\DUK2AC_HFT_2022231.Repositroy.csproj" />
+  </ItemGroup>
+
 </Project>
