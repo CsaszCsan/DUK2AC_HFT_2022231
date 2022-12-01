@@ -22,9 +22,20 @@ namespace DUK2AC_HFT_2022231.Repositroy
             gctx.SaveChanges();
         }
 
-        public abstract T Read(int ID);
+        public T Read(int ID)
+        {
+            return gctx.Set<T>().FirstOrDefault(item => item.Id == ID);
+        }
 
-        public abstract void Update(T item);
+        public void Update(T item)
+        {
+            var old = Read(item.Id);
+            foreach (var prop in old.GetType().GetProperties())
+            {
+                prop.SetValue(old, prop.GetValue(item));
+            }
+            gctx.SaveChanges();
+        }
 
         public void Delete(int ID)
         {

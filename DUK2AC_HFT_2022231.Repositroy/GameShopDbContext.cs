@@ -78,6 +78,9 @@ namespace DUK2AC_HFT_2022231.Repositroy
             Achievement AA2 = new Achievement() { Id = 16, Name = "You listened to Ezio's Family to the first ime", Bonuspoints = 22, GameID = A2.Id };
             Achievement W3A4 = new Achievement() { Id = 17, Name = "Visited Novigrad for the first time", Bonuspoints = 10, GameID = W3.Id };
 
+            modelBuilder.Entity<Developer>().HasData(CDPR, Valve, EA,Ubisoft);
+            modelBuilder.Entity<Game>().HasData(AC2, AC4, CP, W3, CS, HL3,FF,FF2,FF3);
+            modelBuilder.Entity<Achievement>().HasData(HS, RT, ACE,A4,A42,A2,FF1,FF22,FF33,HL,CPA,W3A,W3A2,W3A3,FF1A,AA2,W3A4);
         }
     }
 }
