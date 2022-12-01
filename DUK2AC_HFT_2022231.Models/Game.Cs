@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DUK2AC_HFT_2022231.Models
 {
     [Table("Games")]
-    class Game:DataItem
+    public class Game:DataItem
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -30,10 +30,19 @@ namespace DUK2AC_HFT_2022231.Models
         [ForeignKey(nameof(Developer))]
         public int DevID { get; set; }
 
-        [NotMapped]
-        public virtual Platform Platform { get; set; }
+        public virtual ICollection<Achievement> Achievements { get; set; }
 
-        [ForeignKey(nameof(Platform))]
-        public int PlatID { get; set; }
+        public Game()
+        {
+            this.Achievements = new HashSet<Achievement>();
+        }
+
+        public Game(int id, string title, int price, int devID)
+        {
+            Id = id;
+            Title = title;
+            Price = price;
+            DevID = devID;
+        }
     }
 }

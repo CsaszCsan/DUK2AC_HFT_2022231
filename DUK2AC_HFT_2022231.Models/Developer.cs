@@ -24,5 +24,19 @@ namespace DUK2AC_HFT_2022231.Models
         public string Location { get; set; }
 
 
+        public virtual ICollection<Game> GamesMade { get; set; }
+
+        public Developer()
+        {
+            this.GamesMade = new HashSet<Game>();
+        }
+
+        public Developer(int id, string name, string location)
+        {
+            Id = id;
+            Name = name;
+            Location = location;
+            
+        }
     }
 }
