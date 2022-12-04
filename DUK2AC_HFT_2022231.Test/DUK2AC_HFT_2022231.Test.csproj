@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+	  <PackageReference Include="Moq" Version="4.17.1" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DUK2AC_HFT_2022231.Logic\DUK2AC_HFT_2022231.Logic.csproj" />
     <ProjectReference Include="..\DUK2AC_HFT_2022231.Models\DUK2AC_HFT_2022231.Models.csproj" />
     <ProjectReference Include="..\DUK2AC_HFT_2022231.Repositroy\DUK2AC_HFT_2022231.Repositroy.csproj" />

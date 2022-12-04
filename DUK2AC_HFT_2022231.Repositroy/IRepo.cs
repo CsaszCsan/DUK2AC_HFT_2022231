@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DUK2AC_HFT_2022231.Repositroy
 {
-    interface IRepo<T> where T : DataItem
+    public interface IRepo<T> where T : DataItem
     {
         
           IQueryable<T> ReadAll();
