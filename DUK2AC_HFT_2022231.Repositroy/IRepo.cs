@@ -19,6 +19,7 @@ namespace DUK2AC_HFT_2022231.Repositroy
           void Update(T item);
 
           void Delete(int ID);
+
         
     }
 }

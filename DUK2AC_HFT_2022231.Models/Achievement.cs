@@ -25,13 +25,13 @@ namespace DUK2AC_HFT_2022231.Models
         [ForeignKey(nameof(game))]
         public int GameID { get; set; }
         
-        public int? Bonuspoints { get; set; }
+        public int Bonuspoints { get; set; }
 
         public Achievement()
         {
         }
 
-        public Achievement(int id, string name, int? bonuspoints)
+        public Achievement(int id, string name, int bonuspoints)
         {
             Id = id;
             Name = name;

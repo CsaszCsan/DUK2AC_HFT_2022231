@@ -41,5 +41,13 @@ namespace DUK2AC_HFT_2022231.Logic
         {
             Repo.Update(item);
         }
+        public IEnumerable<KeyValuePair<string, int>> GetGameWithTheMostAchievementPoints()
+        {
+            return from x in Repo.ReadAll()
+                   group x by x.game.Title into g
+                   orderby g.Sum(t=>t.Bonuspoints) descending
+                   select new KeyValuePair<string, int>
+                   (g.Key, g.Sum(t => t.Bonuspoints));
+        }
     }
 }

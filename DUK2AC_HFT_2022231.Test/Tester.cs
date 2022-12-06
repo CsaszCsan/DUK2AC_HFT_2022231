@@ -23,67 +23,114 @@ namespace DUK2AC_HFT_2022231.Test
         public void Init()
         {
             mockdevrepo = new Mock<IRepo<Developer>>();
-            mockdevrepo.Setup(m => m.ReadAll()).Returns(new List<Developer>()
-            {
-                new Developer()
-                {
-                    Id = 1, Name = "CD Project Red" , Location="Poland"
-                },
-                new Developer()
-                {
-                    Id = 2, Name = "Valve Inc", Location = "Lord Gaben's Residency"
-                },
 
-            }.AsQueryable());
+
+            Developer dev1 = new Developer()
+            {
+                Id = 1,
+                Name = "CD Project Red",
+                Location = "Poland"
+            };
+            Developer dev2 = new Developer()
+            {
+                Id = 2,
+                Name = "Valve Inc",
+                Location = "Lord Gaben's Residency"
+            };
+
+
+
             developerLogic = new DeveloperLogic(mockdevrepo.Object);
 
 
             mockgamerepo = new Mock<IRepo<Game>>();
-            mockgamerepo.Setup(m => m.ReadAll()).Returns(new List<Game>()
-            {
-                new Game()
-                {
-                      Id = 1, DevID = 1, Title = "The Witcher 3 Wild Hunt", Price = 40 
-                },
-                new Game()
-                {
-                      Id = 2, DevID = 1, Title = "Counter Strike : Global Offensive", Price = 0
-                },
-                new Game()
-                {
-                      Id = 3, DevID = 1, Title = "Half-Life 3 The never ending story", Price = 99
-                },
 
-            }.AsQueryable());
+            Game game1 = new Game()
+            {
+                Id = 1,
+                DevID = 1,
+                Title = "The Witcher 3 Wild Hunt",
+                Price = 40,
+                Developer = dev1
+            };
+            Game game2 = new Game()
+            {
+                Id = 2,
+                DevID = 1,
+                Title = "Counter Strike : Global Offensive",
+                Price = 0,
+                Developer = dev2
+            };
+            Game game3 = new Game()
+            {
+                Id = 3,
+                DevID = 1,
+                Title = "Half-Life 3 The never ending story",
+                Price = 99,
+                Developer = dev2
+            };
+
+
             gameLogic = new GameLogic(mockgamerepo.Object);
 
             mockachirepo = new Mock<IRepo<Achievement>>();
-            mockachirepo.Setup(m => m.ReadAll()).Returns(new List<Achievement>()
+
+            Achievement achi1 = new Achievement()
             {
-                new Achievement()
-                {
-                    Id = 1, Name = "Headshot", Bonuspoints = 10, GameID = 2
+                Id = 1,
+                Name = "Headshot",
+                Bonuspoints = 10,
+                GameID = 2,
+                game = game2
 
-                },
-                new Achievement()
-                {
-                    Id = 2, Name = "Retake", Bonuspoints = 20, GameID = 2
+            };
+            Achievement achi2 = new Achievement()
+            {
+                Id = 2,
+                Name = "Retake",
+                Bonuspoints = 20,
+                GameID = 2,
+                game = game2
 
-                },
-                new Achievement()
-                {
-                    Id = 3, Name = "ROACH", Bonuspoints = 30, GameID = 1
+            };
+            Achievement achi3 = new Achievement()
+            {
+                Id = 3,
+                Name = "ROACH",
+                Bonuspoints = 30,
+                GameID = 1,
+                game = game1
 
-                },
-                new Achievement()
-                {
-                    Id = 4, Name = "Released", Bonuspoints = 50, GameID = 3
+            };
+            Achievement achi4 = new Achievement()
+            {
+                Id = 4,
+                Name = "Released",
+                Bonuspoints = 50,
+                GameID = 3,
+                game = game3
 
-                },
+            };
 
-            }.AsQueryable());
+
             achievementLogic = new AchievementLogic(mockachirepo.Object);
+            mockdevrepo.Setup((t) => t.ReadAll()).Returns(
+                new List<Developer>()
+                {
+                    dev1, dev2
+                }.AsQueryable);
+            mockachirepo.Setup((t) => t.ReadAll()).Returns(
+                new List<Achievement>()
+                {
+                    achi1, achi2,achi3,achi4
+                }.AsQueryable);
+            mockgamerepo.Setup((t) => t.ReadAll()).Returns(
+                new List<Game>()
+                {
+                    game1, game2,game3
+                }.AsQueryable);
         }
+
 
 
         [Test]
@@ -118,6 +165,13 @@ namespace DUK2AC_HFT_2022231.Test
 
 
             mockachirepo.Verify(r => r.Create(achi), Times.Once);
+        }
+        [Test]
+        public void GetGameWithTheMostAchievementPointsTest()
+        {
+            var result = achievementLogic.GetGameWithTheMostAchievementPoints().ToArray();
+            Assert.That(result[0], Is.EqualTo(new KeyValuePair<string, int>("Half-Life 3 The never ending story", 50)));
+
         }
 
 
