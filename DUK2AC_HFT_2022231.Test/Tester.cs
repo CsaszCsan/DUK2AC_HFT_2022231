@@ -173,6 +173,12 @@ namespace DUK2AC_HFT_2022231.Test
             Assert.That(result[0], Is.EqualTo(new KeyValuePair<string, int>("Half-Life 3 The never ending story", 50)));
 
         }
+        [Test]
+        public void DevsWithMostGamesMadeTest()
+        {
+            var result = gameLogic.DevsWithMostGamesMade().ToArray();
+            Assert.That(result[0], Is.EqualTo(new KeyValuePair<string, int>("Valve Inc",2)));
+        }
 
 
     }
