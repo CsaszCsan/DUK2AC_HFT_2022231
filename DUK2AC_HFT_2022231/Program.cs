@@ -118,6 +118,7 @@ namespace DUK2AC_HFT_2022231.Client
         }
         static void Main(string[] args)
         {
+            //Console done as it should but it does not open
             rest = new RestService("http://localhost:42084/", "games");
             
             var GameSubMenu = new ConsoleMenu(args, level: 1)
