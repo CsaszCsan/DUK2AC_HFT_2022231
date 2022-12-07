@@ -29,13 +29,16 @@ namespace DUK2AC_HFT_2022231.Test
             {
                 Id = 1,
                 Name = "CD Project Red",
-                Location = "Poland"
+                Location = "Poland",
+                FoundationYear=1995
+                
             };
             Developer dev2 = new Developer()
             {
                 Id = 2,
                 Name = "Valve Inc",
-                Location = "Lord Gaben's Residency"
+                Location = "Lord Gaben's Residency",
+                FoundationYear=1993
             };
 
 
@@ -51,7 +54,8 @@ namespace DUK2AC_HFT_2022231.Test
                 DevID = 1,
                 Title = "The Witcher 3 Wild Hunt",
                 Price = 40,
-                Developer = dev1
+                Developer = dev1,
+                Genre="RPG"
             };
             Game game2 = new Game()
             {
@@ -59,7 +63,8 @@ namespace DUK2AC_HFT_2022231.Test
                 DevID = 1,
                 Title = "Counter Strike : Global Offensive",
                 Price = 0,
-                Developer = dev2
+                Developer = dev2,
+                Genre="Shooter"
             };
             Game game3 = new Game()
             {
@@ -67,7 +72,8 @@ namespace DUK2AC_HFT_2022231.Test
                 DevID = 1,
                 Title = "Half-Life 3 The never ending story",
                 Price = 99,
-                Developer = dev2
+                Developer = dev2,
+                Genre="Shooter"
             };
 
 
@@ -132,7 +138,12 @@ namespace DUK2AC_HFT_2022231.Test
         }
 
 
-
+        [Test]
+        public void GameDeleteTest()
+        {
+            gameLogic.Delete(1);
+            mockgamerepo.Verify(t => t.Delete(1), Times.Once);
+        }
         [Test]
         public void GameCreateTest()
         {
@@ -171,7 +182,7 @@ namespace DUK2AC_HFT_2022231.Test
         {
             var game = new Game() { Id = 4, DevID = 1, Title = "The Witcher 3 Wild Hunt Hearts of Stone DLC", Price = 100 };
 
-
+            
             Assert.That(() => gameLogic.Create(game), Throws.ArgumentException);
 
 
@@ -196,7 +207,18 @@ namespace DUK2AC_HFT_2022231.Test
             var result = gameLogic.DevsWithCheapestGamesMade().ToArray();
             Assert.That(result[0], Is.EqualTo(new KeyValuePair<string, double>("CD Project Red", 40)));
         }
-
+        [Test]
+        public void GamesCountByOldestDevTest()
+        {
+            var result = gameLogic.GamesCountByOldestDev().ToArray();
+            Assert.That(result[0], Is.EqualTo(new KeyValuePair<int, int>(1993, 2)));
+        }
+        [Test]
+        public void GetAchievementsByGenreTest()
+        {
+            var result = achievementLogic.GetAchievementsByGenre().ToArray();
+            Assert.That(result[0], Is.EqualTo(new KeyValuePair<string, int>("Shooter", 3)));
+        }
 
     }
 }
