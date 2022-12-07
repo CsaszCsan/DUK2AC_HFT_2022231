@@ -65,6 +65,17 @@ namespace DUK2AC_HFT_2022231.Logic
 
         }
 
+        public IEnumerable<KeyValuePair<int, int>> GamesCountByOldestDev()
+        {
+            return from x in Repo.ReadAll()
+                   group x by x.Developer.FoundationYear into g
+                   orderby g.Key ascending
+                   select new KeyValuePair<int, int>
+                   (g.Key, g.Count());
+
+        }
+
+
 
     }
 }

@@ -49,5 +49,13 @@ namespace DUK2AC_HFT_2022231.Logic
                    select new KeyValuePair<string, int>
                    (g.Key, g.Sum(t => t.Bonuspoints));
         }
+        public IEnumerable<KeyValuePair<string,int>> GetAchievementsByGenre()
+        {
+            return from x in Repo.ReadAll()
+                   group x by x.game.Genre into g
+                   orderby g.Count() descending
+                   select new KeyValuePair<string, int>
+                   (g.Key, g.Count());
+        }
     }
 }
