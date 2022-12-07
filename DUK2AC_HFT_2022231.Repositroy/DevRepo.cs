@@ -13,5 +13,11 @@ namespace DUK2AC_HFT_2022231.Repositroy
         {
 
         }
+        public override void Update(Developer item)
+        {
+            var old = Read(item.Id);
+            old.Name = item.Name;
+            gctx.SaveChanges();
+        }
     }
 }

@@ -13,7 +13,13 @@ namespace DUK2AC_HFT_2022231.Repositroy
         {
 
         }
+        public override void Update(Game item)
+        {
+            var old = Read(item.Id);
+            old.Price = item.Price;
+            gctx.SaveChanges();
+        }
 
-       
+
     }
 }

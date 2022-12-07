@@ -27,14 +27,9 @@ namespace DUK2AC_HFT_2022231.Repositroy
             return gctx.Set<T>().FirstOrDefault(item => item.Id == ID);
         }
 
-        public void Update(T item)
+        public virtual void Update(T item)
         {
-            var old = Read(item.Id);
-            foreach (var prop in old.GetType().GetProperties())
-            {
-                prop.SetValue(old, prop.GetValue(item));
-            }
-            gctx.SaveChanges();
+            
         }
 
         public void Delete(int ID)
