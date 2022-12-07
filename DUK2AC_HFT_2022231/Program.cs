@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using ConsoleTools;
 using DUK2AC_HFT_2022231.Models;
+using System.Threading;
 
 namespace DUK2AC_HFT_2022231.Client
 {
     class Program
     {
-        static RestService rest;
+        static RestService rest=new RestService("http://localhost:42084/");
 
         private static void Update(string v)
         {
@@ -92,24 +93,24 @@ namespace DUK2AC_HFT_2022231.Client
         {
             if (v == "Game")
             {
-                List<Game> actors = rest.Get<Game>("Game");
-                foreach (var item in actors)
+                List<Game> Games = rest.Get<Game>("Game");
+                foreach (var item in Games)
                 {
                     Console.WriteLine(item.Id + ": " + item.Title);
                 }
             }
             else if (v == "Developer")
             {
-                List<Developer> Director = rest.Get<Developer>("Developer");
-                foreach (var item in Director)
+                List<Developer> Devs = rest.Get<Developer>("Developer");
+                foreach (var item in Devs)
                 {
                     Console.WriteLine(item.Id + ": " + item.Name);
                 }
             }
             else if (v == "Achievement")
             {
-                List<Achievement> Role = rest.Get<Achievement>("Achievement");
-                foreach (var item in Role)
+                List<Achievement> achievements = rest.Get<Achievement>("Achievement");
+                foreach (var item in achievements)
                 {
                     Console.WriteLine(item.Id + ": " + item.Name);
                 }
@@ -118,9 +119,12 @@ namespace DUK2AC_HFT_2022231.Client
         }
         static void Main(string[] args)
         {
-            //Console done as it should but it does not open
-            rest = new RestService("http://localhost:42084/", "games");
             
+            Thread.Sleep(5000);
+            var game = rest.Get<Game>("game");
+            var dev = rest.Get<Developer>("developer");
+            var achievement = rest.Get<Achievement>("achievement");
+
             var GameSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Game"))
                 .Add("Create", () => Create("Game"))
