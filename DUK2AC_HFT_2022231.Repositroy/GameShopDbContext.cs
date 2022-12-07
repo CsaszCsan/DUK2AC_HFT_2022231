@@ -45,20 +45,20 @@ namespace DUK2AC_HFT_2022231.Repositroy
             });
 
             //Fillin the datebase with data
-            Developer CDPR = new Developer() { Id = 1, Name = "CD Project Red" , Location="Poland"};
-            Developer Valve = new Developer() { Id = 2, Name = "Valve Inc", Location = "Lord Gaben's Residency" };
-            Developer EA = new Developer() { Id = 3, Name = "EA Games", Location = "Whereever the money is" };
-            Developer Ubisoft = new Developer() { Id = 4, Name = "Ubisoft Montreal", Location = "Canada" };
+            Developer CDPR = new Developer() { Id = 1, Name = "CD Project Red" , Location="Poland",FoundationYear=1995};
+            Developer Valve = new Developer() { Id = 2, Name = "Valve Inc", Location = "Lord Gaben's Residency",FoundationYear=1990 };
+            Developer EA = new Developer() { Id = 3, Name = "EA Games", Location = "Whereever the money is", FoundationYear = 2000 };
+            Developer Ubisoft = new Developer() { Id = 4, Name = "Ubisoft Montreal", Location = "Canada", FoundationYear = 1993 };
 
-            Game AC4 = new Game() {Id=1,DevID=Ubisoft.Id, Title= "Assassins's Creed 4 Black Flag" , Price=30};
-            Game AC2 = new Game() { Id = 2, DevID = Ubisoft.Id, Title = "Assassins's Creed 2 ", Price = 20 };
-            Game CP = new Game() { Id = 3, DevID = CDPR.Id, Title = "CyberPunk 2077", Price = 60 };
-            Game W3 = new Game() { Id = 4, DevID = CDPR.Id, Title = "The Witcher 3 Wild Hunt", Price = 40 };
-            Game CS = new Game() { Id = 5, DevID = Valve.Id, Title = "Counter Strike : Global Offensive", Price = 0 };
-            Game HL3 = new Game() { Id = 6, DevID = Valve.Id, Title = "Half-Life 3 The never ending story", Price = 99 };
-            Game FF = new Game() { Id = 7, DevID = EA.Id, Title = "FIFA20", Price = 40 };
-            Game FF2 = new Game() { Id = 8, DevID = EA.Id, Title = "FIFA30", Price = 50 };
-            Game FF3 = new Game() { Id = 9, DevID = EA.Id, Title = "FIFA40", Price = 60 };
+            Game AC4 = new Game() {Id=1,DevID=Ubisoft.Id, Title= "Assassins's Creed 4 Black Flag" , Price=30, Genre="Parkour"};
+            Game AC2 = new Game() { Id = 2, DevID = Ubisoft.Id, Title = "Assassins's Creed 2 ", Price = 20, Genre = "Parkour" };
+            Game CP = new Game() { Id = 3, DevID = CDPR.Id, Title = "CyberPunk 2077", Price = 60, Genre = "Shooter" };
+            Game W3 = new Game() { Id = 4, DevID = CDPR.Id, Title = "The Witcher 3 Wild Hunt", Price = 40, Genre = "RPG" };
+            Game CS = new Game() { Id = 5, DevID = Valve.Id, Title = "Counter Strike : Global Offensive", Price = 0, Genre = "Shooter" };
+            Game HL3 = new Game() { Id = 6, DevID = Valve.Id, Title = "Half-Life 3 The never ending story", Price = 99, Genre = "Shooter" };
+            Game FF = new Game() { Id = 7, DevID = EA.Id, Title = "FIFA20", Price = 40, Genre ="Sport" };
+            Game FF2 = new Game() { Id = 8, DevID = EA.Id, Title = "FIFA30", Price = 50, Genre = "Sport" };
+            Game FF3 = new Game() { Id = 9, DevID = EA.Id, Title = "FIFA40", Price = 60, Genre = "Sport" };
 
             Achievement HS = new Achievement() { Id = 1, Name = "Headshot", Bonuspoints = 10, GameID = CS.Id };
             Achievement RT = new Achievement() { Id = 2, Name = "Retake the site", Bonuspoints = 10, GameID = CS.Id };

@@ -20,6 +20,8 @@ namespace DUK2AC_HFT_2022231.Models
         [Required]
         [Column("game_name")]
         public string Title { get; set; }
+        [MaxLength(240)]
+        public string Genre { get; set; }
 
         [Required]
         public int Price { get; set; }

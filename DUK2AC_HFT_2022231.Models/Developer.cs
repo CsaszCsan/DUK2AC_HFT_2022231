@@ -23,7 +23,7 @@ namespace DUK2AC_HFT_2022231.Models
         [MaxLength(240)]
         public string Location { get; set; }
 
-
+        public int FoundationYear { get; set; }
         public virtual ICollection<Game> GamesMade { get; set; }
 
         public Developer()
