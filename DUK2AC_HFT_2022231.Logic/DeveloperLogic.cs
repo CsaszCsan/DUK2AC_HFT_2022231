@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DUK2AC_HFT_2022231.Logic
 {
-    public class DeveloperLogic : IGameShopLogic<Developer>
+    public class DeveloperLogic : IGameShopLogic<Developer>, IDeveloperLogic
     {
         IRepo<Developer> Repo;
 
@@ -40,6 +40,6 @@ namespace DUK2AC_HFT_2022231.Logic
         public void Update(Developer item)
         {
             Repo.Update(item);
-        }                   
+        }
     }
 }

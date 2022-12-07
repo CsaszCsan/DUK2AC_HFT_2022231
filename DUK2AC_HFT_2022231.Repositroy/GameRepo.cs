@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DUK2AC_HFT_2022231.Repositroy
 {
-    class GameRepo : Repo<Game>, IRepo<Game>
+    public class GameRepo : Repo<Game>, IRepo<Game>
     {
         public GameRepo(GameShopDbContext gctx) : base(gctx)
         {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DUK2AC_HFT_2022231.Logic
 {
-    public class GameLogic : IGameShopLogic<Game>
+    public class GameLogic : IGameShopLogic<Game>, IGameLogic
     {
         IRepo<Game> Repo;
 
@@ -19,7 +19,7 @@ namespace DUK2AC_HFT_2022231.Logic
 
         public void Create(Game item)
         {
-            if(item.Price>=100)
+            if (item.Price >= 100)
             {
                 throw new ArgumentException();
             }
@@ -46,22 +46,22 @@ namespace DUK2AC_HFT_2022231.Logic
             Repo.Update(item);
         }
 
-        public IEnumerable<KeyValuePair<string,int>> DevsWithMostGamesMade()
+        public IEnumerable<KeyValuePair<string, int>> DevsWithMostGamesMade()
         {
             return from x in Repo.ReadAll()
                    group x by x.Developer.Name into g
                    orderby g.Count() descending
                    select new KeyValuePair<string, int>
-                   (g.Key,g.Count());
+                   (g.Key, g.Count());
 
         }
         public IEnumerable<KeyValuePair<string, double>> DevsWithCheapestGamesMade()
         {
             return from x in Repo.ReadAll()
                    group x by x.Developer.Name into g
-                   orderby g.Average(t=>t.Price) ascending
-                   select new KeyValuePair<string,double>
-                   (g.Key,g.Average(t=>t.Price));
+                   orderby g.Average(t => t.Price) ascending
+                   select new KeyValuePair<string, double>
+                   (g.Key, g.Average(t => t.Price));
 
         }
 

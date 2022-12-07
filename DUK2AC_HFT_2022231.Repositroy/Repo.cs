@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DUK2AC_HFT_2022231.Repositroy
 {
-    abstract class Repo<T>:IRepo<T> where T:DataItem
+   public abstract class Repo<T>:IRepo<T> where T:DataItem
     {
         protected GameShopDbContext gctx;
 

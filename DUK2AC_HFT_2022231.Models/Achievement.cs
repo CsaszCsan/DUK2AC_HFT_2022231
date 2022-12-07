@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DUK2AC_HFT_2022231.Models
@@ -19,7 +20,7 @@ namespace DUK2AC_HFT_2022231.Models
         [Required]
         [MaxLength(240)]
         public string Name { get; set; }
-
+        [JsonIgnore]
         [NotMapped]
         public virtual Game game { get; set; }
         [ForeignKey(nameof(game))]

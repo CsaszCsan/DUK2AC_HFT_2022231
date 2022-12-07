@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DUK2AC_HFT_2022231.Models
@@ -25,13 +26,14 @@ namespace DUK2AC_HFT_2022231.Models
 
         [Required]
         public int Price { get; set; }
-
+        [JsonIgnore]
         [NotMapped]
         public virtual Developer Developer { get; set; }
 
         [ForeignKey(nameof(Developer))]
         public int DevID { get; set; }
-
+        [JsonIgnore]
+        [NotMapped]
         public virtual ICollection<Achievement> Achievements { get; set; }
 
         public Game()

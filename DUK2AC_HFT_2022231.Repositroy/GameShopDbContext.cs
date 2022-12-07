@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DUK2AC_HFT_2022231.Repositroy
 {
-    class GameShopDbContext:DbContext
+    public class GameShopDbContext:DbContext
     {
         public DbSet<Game> Games { get; set; }
         public DbSet<Developer> Developers { get; set; }
