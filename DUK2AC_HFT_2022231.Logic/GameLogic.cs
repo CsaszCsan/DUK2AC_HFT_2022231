@@ -19,6 +19,10 @@ namespace DUK2AC_HFT_2022231.Logic
 
         public void Create(Game item)
         {
+            if(item.Price>=100)
+            {
+                throw new ArgumentException();
+            }
             this.Repo.Create(item);
         }
 
@@ -51,7 +55,16 @@ namespace DUK2AC_HFT_2022231.Logic
                    (g.Key,g.Count());
 
         }
+        public IEnumerable<KeyValuePair<string, double>> DevsWithCheapestGamesMade()
+        {
+            return from x in Repo.ReadAll()
+                   group x by x.Developer.Name into g
+                   orderby g.Average(t=>t.Price) ascending
+                   select new KeyValuePair<string,double>
+                   (g.Key,g.Average(t=>t.Price));
 
-        
+        }
+
+
     }
 }

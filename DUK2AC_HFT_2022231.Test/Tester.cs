@@ -167,6 +167,17 @@ namespace DUK2AC_HFT_2022231.Test
             mockachirepo.Verify(r => r.Create(achi), Times.Once);
         }
         [Test]
+        public void GameWrongCreateTest()
+        {
+            var game = new Game() { Id = 4, DevID = 1, Title = "The Witcher 3 Wild Hunt Hearts of Stone DLC", Price = 100 };
+
+
+            Assert.That(() => gameLogic.Create(game), Throws.ArgumentException);
+
+
+
+        }
+        [Test]
         public void GetGameWithTheMostAchievementPointsTest()
         {
             var result = achievementLogic.GetGameWithTheMostAchievementPoints().ToArray();
@@ -178,6 +189,12 @@ namespace DUK2AC_HFT_2022231.Test
         {
             var result = gameLogic.DevsWithMostGamesMade().ToArray();
             Assert.That(result[0], Is.EqualTo(new KeyValuePair<string, int>("Valve Inc",2)));
+        }
+        [Test]
+        public void DevsWithCheapestGamesMadeTest()
+        {
+            var result = gameLogic.DevsWithCheapestGamesMade().ToArray();
+            Assert.That(result[0], Is.EqualTo(new KeyValuePair<string, double>("CD Project Red", 40)));
         }
 
 
