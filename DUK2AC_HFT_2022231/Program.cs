@@ -8,9 +8,117 @@ namespace DUK2AC_HFT_2022231.Client
     class Program
     {
         static RestService rest;
+
+        private static void Update(string v)
+        {
+            if (v == "Game")
+            {
+                Console.Write("Enter Game's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Game one = rest.Get<Game>(id, "Game");
+                Console.Write($"New price [old: {one.Price}]: ");
+                int price = int.Parse(Console.ReadLine());
+                one.Price = price;
+                rest.Put(one, "Game");
+            }
+            else if (v == "Developer")
+            {
+                Console.Write("Enter Developer's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Developer one = rest.Get<Developer>(id, "Developer");
+                Console.Write($"New name [old: {one.Name}]: ");
+                string name = Console.ReadLine();
+                one.Name = name;
+                rest.Put(one, "Developer");
+            }
+            else if (v == "Achievement")
+            {
+                Console.Write("Enter Achievement's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Achievement one = rest.Get<Achievement>(id, "Achievement");
+                Console.Write($"New bonuspoint [old: {one.Bonuspoints}]: ");
+                int point = int.Parse(Console.ReadLine());
+                one.Bonuspoints = point;
+                rest.Put(one, "Achievement");
+            }
+        }
+
+        private static void Delete(string v)
+        {
+            if (v == "Game")
+            {
+                Console.Write("Enter Game's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "Game");
+            }
+            else if (v == "Developer")
+            {
+                Console.Write("Enter Developer's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "Developer");
+            }
+            else if (v == "Achievement")
+            {
+                Console.Write("Enter Achievement's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "Achievement");
+            }
+            
+        }
+
+        private static void Create(string v)
+        {
+            if (v == "Game")
+            {
+                Console.Write("Enter Game Name: ");
+                string name = Console.ReadLine();
+                rest.Post(new Game() { Title = name }, "Game");
+            }
+            else if (v == "Developer")
+            {
+                Console.Write("Enter Developer Name: ");
+                string name = Console.ReadLine();
+                rest.Post(new Developer() { Name = name }, "Developer");
+            }
+            else if (v == "Achievement")
+            {
+                Console.Write("Enter Achievement Name: ");
+                string name = Console.ReadLine();
+                rest.Post(new Achievement() { Name = name }, "Achievement");
+            }
+        }
+
+        private static void List(string v)
+        {
+            if (v == "Game")
+            {
+                List<Game> actors = rest.Get<Game>("Game");
+                foreach (var item in actors)
+                {
+                    Console.WriteLine(item.Id + ": " + item.Title);
+                }
+            }
+            else if (v == "Developer")
+            {
+                List<Developer> Director = rest.Get<Developer>("Developer");
+                foreach (var item in Director)
+                {
+                    Console.WriteLine(item.Id + ": " + item.Name);
+                }
+            }
+            else if (v == "Achievement")
+            {
+                List<Achievement> Role = rest.Get<Achievement>("Achievement");
+                foreach (var item in Role)
+                {
+                    Console.WriteLine(item.Id + ": " + item.Name);
+                }
+            }
+            Console.ReadKey();
+        }
         static void Main(string[] args)
         {
-            rest = new RestService("http://localhost:42084/", "GameShop");
+            rest = new RestService("http://localhost:42084/", "games");
             
             var GameSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Game"))
@@ -20,19 +128,18 @@ namespace DUK2AC_HFT_2022231.Client
                 .Add("Exit", ConsoleMenu.Close);
 
             var DevSubMenu = new ConsoleMenu(args, level: 1)
-                .Add("List", () => List("Dev"))
-                .Add("Create", () => Create("Dev"))
-                .Add("Delete", () => Delete("Dev"))
-                .Add("Update", () => Update("Dev"))
+                .Add("List", () => List("Developer"))
+                .Add("Create", () => Create("Developer"))
+                .Add("Delete", () => Delete("Developer"))
+                .Add("Update", () => Update("Developer"))
                 .Add("Exit", ConsoleMenu.Close);
 
             var AchiSubMenu = new ConsoleMenu(args, level: 1)
-                .Add("List", () => List("Achi"))
-                .Add("Create", () => Create("Achi"))
-                .Add("Delete", () => Delete("Achi"))
-                .Add("Update", () => Update("Achi"))
+                .Add("List", () => List("Achievement"))
+                .Add("Create", () => Create("Achievement"))
+                .Add("Delete", () => Delete("Achievement"))
+                .Add("Update", () => Update("Achievement"))
                 .Add("Exit", ConsoleMenu.Close);
-
             
 
 
@@ -45,114 +152,6 @@ namespace DUK2AC_HFT_2022231.Client
             menu.Show();
             
             
-        }
-
-        private static void Update(string v)
-        {
-            if (v == "Game")
-            {
-                Console.Write("Enter Game's id to update: ");
-                int id = int.Parse(Console.ReadLine());
-                Game one = rest.Get<Game>(id, "game");
-                Console.Write($"New price [old: {one.Price}]: ");
-                int price = int.Parse(Console.ReadLine());
-                one.Price = price;
-                rest.Put(one, "game");
-            }
-            else if (v == "Dev")
-            {
-                Console.Write("Enter Dev's id to update: ");
-                int id = int.Parse(Console.ReadLine());
-                Developer one = rest.Get<Developer>(id, "dev");
-                Console.Write($"New name [old: {one.Name}]: ");
-                string name = Console.ReadLine();
-                one.Name = name;
-                rest.Put(one, "dev");
-            }
-            else if (v == "Achi")
-            {
-                Console.Write("Enter Achi's id to update: ");
-                int id = int.Parse(Console.ReadLine());
-                Achievement one = rest.Get<Achievement>(id, "achi");
-                Console.Write($"New bonuspoint [old: {one.Bonuspoints}]: ");
-                int point = int.Parse(Console.ReadLine());
-                one.Bonuspoints = point;
-                rest.Put(one, "achi");
-            }
-        }
-
-        private static void Delete(string v)
-        {
-            if (v == "Game")
-            {
-                Console.Write("Enter Game's id to delete: ");
-                int id = int.Parse(Console.ReadLine());
-                rest.Delete(id, "Game");
-            }
-            else if (v == "Dev")
-            {
-                Console.Write("Enter Dev's id to delete: ");
-                int id = int.Parse(Console.ReadLine());
-                rest.Delete(id, "Dev");
-            }
-            else if (v == "Achi")
-            {
-                Console.Write("Enter Achi's id to delete: ");
-                int id = int.Parse(Console.ReadLine());
-                rest.Delete(id, "achi");
-            }
-            
-        }
-
-        private static void Create(string v)
-        {
-            if (v == "Game")
-            {
-                Console.Write("Enter Actor Name: ");
-                string name = Console.ReadLine();
-                rest.Post(new Game() { Title = name }, "Game");
-            }
-            else if (v == "Dev")
-            {
-                Console.Write("Enter Director Name: ");
-                string name = Console.ReadLine();
-                rest.Post(new Developer() { Name = name }, "Dev");
-            }
-            else if (v == "Achi")
-            {
-                Console.Write("Enter Role Name: ");
-                string name = Console.ReadLine();
-                rest.Post(new Achievement() { Name = name }, "Achi");
-            }
-        }
-
-        private static void List(string v)
-        {
-            if (v == "Game")
-            {
-                List<Game> actors = rest.Get<Game>("actor");
-                foreach (var item in actors)
-                {
-                    Console.WriteLine(item.Id + ": " + item.Title);
-                }
-            }
-            else if (v == "Dev")
-            {
-                List<Developer> Director = rest.Get<Developer>("director");
-                foreach (var item in Director)
-                {
-                    Console.WriteLine(item.Id + ": " + item.Name);
-                }
-            }
-            else if (v == "Achi")
-            {
-                List<Achievement> Role = rest.Get<Achievement>("role");
-                foreach (var item in Role)
-                {
-                    Console.WriteLine(item.Id + ": " + item.Name);
-                }
-            }
-            Console.ReadKey();
         }
     }
 }
